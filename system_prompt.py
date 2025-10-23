@@ -259,6 +259,24 @@ Produce a single, clean markdown document suitable for Docusaurus documentation 
 - Inline backticks are allowed ONLY for plain identifiers or commands without braces/operators (e.g., `len`, `print`, `pip install`).
 - Never output raw curly-brace expressions outside code fences.
 
+### Containers (Lists and Blockquotes)
+- Avoid placing code blocks inside block quotes. Prefer normal fenced code outside quotes.
+- If a block quote is absolutely necessary, do NOT include any code or braces inside it.
+- For lists, when showing code:
+  - Add a blank line before the fence under the list item.
+  - Indent the fenced code block to align under the list item (at least two spaces).
+  - Example:
+    - Item description
+
+      ```python
+      example = {"safe": True}
+      ```
+
+### Linking Rules
+- Prefer no hyperlinks unless explicitly requested.
+- If links are required, use relative doc links only to files that exist next to this page (e.g., `./topic.md`).
+- Do not use `docs/...` or site-absolute paths; avoid external links unless explicitly requested.
+
 ## STRICT OUTPUT POLICY
 
 - Output only the final chapter markdown content.
