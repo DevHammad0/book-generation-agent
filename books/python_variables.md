@@ -2,475 +2,486 @@
 
 ## Overview
 
-Imagine you’re building a tiny pantry in your computer. You want to store ingredients like flour, sugar, and salt so you can use them later. In Python, those “ingredients” are values, and the containers you store them in are called variables. Variables let you name, store, and manipulate data as your program runs. They’re fundamental: every line of Python code interacts with variables in some way—assigning values, changing them, or using them to perform calculations.
+Imagine you’re cooking with a kitchen station. You need a bowl, a spoon, and a recipe card to hold your ingredients and steps. In programming, a variable is like that bowl and recipe card: a named storage location that holds a value (like a number or text) so you can use it later in your program.
 
-In this chapter, you’ll learn:
-- What a variable is and how Python treats data values
-- How to create and use variables effectively
-- The rules for naming variables
-- How to update and delete variables
-- How different data types interact with variables
-- Common pitfalls and best practices
+🎯 Learning Objectives
+- Define what a variable is and how to name it in Python.
+- Create and assign values to variables using different data types.
+- Understand basic rules for valid variable names and common naming conventions.
+- Use variables in simple operations and print their values.
+- Recognize when to update a variable’s value (reassignment).
 
-By the end, you’ll be able to declare variables confidently, choose meaningful names, and write basic programs that rely on holding data in memory.
+Python variables are fundamental building blocks. They let you store data, perform computations, and make your programs behave intelligently. Let’s break down the concept from first principles and build up with hands-on practice.
 
 ---
 
 ## Key Concepts
 
-### What is a variable?
-- A variable is a named location in memory that stores a value.
-- The value can be of various types: numbers, text, booleans, lists, dictionaries, and more.
-- Variables have a name (identifier) and a value. The value can be changed, but the name remains the same.
+- *Variable*: a named container that stores a value.
+- *Assignment*: giving a value to a variable using the equals sign, e.g., `x = 5`.
+- *Data types*: common kinds of values Python can store, such as integers, floats, strings, booleans, and more complex types.
+- *Type inference*: Python automatically knows the type of a value based on what you assign.
+- *Reassignment*: you can change the value stored in a variable at any time.
+- *Variable naming rules*: letters, digits, and underscores; cannot start with a digit; case-sensitive.
 
-### Assignment
-- Assignment binds a name to a value.
-- The simplest form is: `name = value`
-- After assignment, you can use the name to refer to that value.
+Analogy: Think of a variable like a labeled cup. The label is the variable name, the liquid inside is the value, and you can pour in a new liquid (reassign) without changing the label.
 
-### Dynamic typing
-- Python is dynamically typed: you don’t declare a type when you create a variable.
-- The interpreter determines the type from the value you assign.
-- You can rebind the same variable name to a different type later.
-
-### Data types (quick refresher)
-- Numbers: integers and floats (e.g., `42`, `3.14`)
-- Strings: text data (e.g., `"Hello"`, `'World'`)
-- Booleans: `True` or `False`
-- Lists: ordered collections (e.g., `[1, 2, 3]`)
-- Tuples: immutable ordered collections (e.g., `(1, 2, 3)`)
-- Dictionaries: key-value mappings (e.g., `{"name": "Alex"}`)
-- None: absence of a value (special constant `None`)
-
-### Variable naming rules
-- Must start with a letter (a–z, A–Z) or underscore `_`
-- Remaining characters can be letters, digits, or underscores
-- Case-sensitive: `age` and `Age` are different
-- Cannot be Python keywords (e.g., `for`, `while`, `class`, `import`)
-
-### Updating and deleting
-- You can reassign a variable to a new value: `x = 10` → `x = 20`
-- To delete a variable: `del x`
-- After deletion, using the variable name will raise a `NameError`
-
-### Scope and lifetime
-- Variables have scope: where they are accessible (global vs. local)
-- In simple scripts, variables are global to the module. Inside functions, variables can be local unless declared `global`.
-
-### Printing and formatting
-- Use `print()` to display variable values.
-- You can format strings with f-strings: `name = "Alex"; print(f"Hello, {name}!")`
+Why it matters: Variables let you store user input, keep track of counts, build dynamic text, and perform computations. Without variables, a program would have to recompute the same values repeatedly or rely on hard-coded literals.
 
 ---
 
 ## Examples
 
-### Basic assignment
+- Basic integer variable
 ```python
-# Simple variable assignment
-x = 5
-y = 2.7
+age = 16
+print(age)  # 16
+```
+
+- Floating-point number
+```python
+price = 19.99
+print(price)  # 19.99
+```
+
+- String variable
+```python
 name = "Alex"
-
-print(x)      # 5
-print(y)      # 2.7
-print(name)   # Alex
+print("Hello,", name)  # Hello, Alex
 ```
 
-### Reassigning a variable (dynamic typing)
+- Boolean variable
 ```python
-# Reassigning to a different type
-value = 10        # int
-print(type(value))  # <class 'int'>
-
-value = 3.14      # float
-print(type(value))  # <class 'float'>
-
-value = "ten"     # str
-print(type(value))  # <class 'str'>
+is_student = True
+print(is_student)  # True
 ```
 
-### Multiple assignments
+- Updating (reassigning) a variable
 ```python
-a = b = c = 0
-print(a, b, c)  # 0 0 0
-
-# Or assign different values in one line
-x, y, z = 1, 2, 3
-print(x, y, z)  # 1 2 3
+score = 0
+score = score + 1  # or score += 1
+print(score)  # 1
 ```
 
-### Names and readability
+- Variable naming rules (valid vs. invalid)
 ```python
-# Good naming
-user_count = 42
-average_score = 3.75
+# Valid
+first_name = "Jamie"
+_age = 25
+x1 = 10
+
+# Invalid (will cause a syntax error)
+# 1st_place = 2
+# first-name = "Sam"
 ```
 
-### Strings and concatenation
+- Case sensitivity
 ```python
-first_name = "Taylor"
-last_name = "Lee"
-full_name = first_name + " " + last_name
-print(full_name)  # Taylor Lee
-```
-
-### Lists and mutability
-```python
-numbers = [1, 2, 3]
-print(numbers)  # [1, 2, 3]
-
-numbers[0] = 10
-print(numbers)  # [10, 2, 3]
-```
-
-### Dictionaries (mapping)
-```python
-person = {"name": "Alex", "age": 30}
-print(person["name"])  # Alex
-person["city"] = "New York"
-print(person)  # {'name': 'Alex', 'age': 30, 'city': 'New York'}
-```
-
-### None and empty values
-```python
-result = None
-print(result is None)  # True
-
-empty_list = []
-print(len(empty_list))  # 0
-```
-
-### Printing with formatting (f-strings)
-```python
-name = "Jordan"
-score = 95
-print(f"{name} scored {score} on the test.")
-# Jordan scored 95 on the test.
+value = 5
+Value = 10
+print(value)  # 5
+print(Value)  # 10
 ```
 
 ---
 
-## Practice Problems
+## Practice Problems (Guided Practice)
 
-### Problem 1: Simple variable creation
+### Problem 1: Create and print basic variables
 **Difficulty:** ⭐
-**Prerequisites:** None
 
-**Problem Statement:**
-Create three variables: an integer `a` with value 7, a float `b` with value 2.5, and a string `c` with value "Python".
+**Prerequisites:** Basic understanding of Python syntax
+
+**Problem:**
+Create three variables: `city` with your city name, `year` with the current year, and `temperature` with a float value. Print a sentence using all three.
 
 **Starter Code/Guidance:**
-```
-# Your code here
+```python
+city = ...
+year = ...
+temperature = ...
+print(...)
 ```
 
 **Solution:**
-```
-a = 7
-b = 2.5
-c = "Python"
+```python
+city = "Seattle"
+year = 2025
+temperature = 18.5
 
-print(a, b, c)
+print(f"Welcome to {city} in {year}! The temperature is {temperature}°C.")
 ```
 
 **Key Takeaway:**
-You can store different types of data in separate variables and print them together.
+You can store different data types in variables and combine them in output.
 
 ---
 
-### Problem 2: Variable reassignment and type change
+### Problem 2: Simple arithmetic with variables
 **Difficulty:** ⭐⭐
-**Prerequisites:** Problem 1 concepts
 
-**Problem Statement:**
-Start with `msg = "Hi"`. Reassign it to the number 100, then to the boolean `True`. Print the value and its type after each change.
+**Prerequisites:** Basic variables and print
 
-**Starter Code/Guidance:**
-```
-msg = "Hi"
-# Reassign and print after each step
-```
+**Problem:**
+Create two variables `a` and `b` with values 7 and 3. Compute and print their sum, difference, product, and quotient.
 
 **Solution:**
-```
-msg = "Hi"
-print(msg, type(msg))  # Hi <class 'str'>
+```python
+a = 7
+b = 3
 
-msg = 100
-print(msg, type(msg))  # 100 <class 'int'>
+sum_ = a + b
+diff = a - b
+prod = a * b
+quot = a / b
 
-msg = True
-print(msg, type(msg))  # True <class 'bool'>
+print("sum:", sum_)
+print("diff:", diff)
+print("prod:", prod)
+print("quot:", quot)
 ```
 
 **Key Takeaway:**
-Python variables are dynamically typed; their type can change with reassignment.
+Variables can participate in expressions to produce new values.
 
 ---
 
-### Problem 3: List and indexing
+### Problem 3: String concatenation with variables
 **Difficulty:** ⭐⭐⭐
-**Prerequisites:** Basic variable types; lists
 
-**Problem Statement:**
-Create a list `letters` containing the vowels `['a', 'e', 'i', 'o', 'u']`. Print the first and last elements. Change the second element to `'é'` and print the list.
+**Prerequisites:** Strings and variables
 
-**Starter Code/Guidance:**
-```
-letters = ['a', 'e', 'i', 'o', 'u']
-# print first and last, then modify
-```
+**Problem:**
+Create `first` and `last` variables and print a full name by concatenation. Use an explicit space between them.
 
 **Solution:**
-```
-letters = ['a', 'e', 'i', 'o', 'u']
-print(letters[0])  # a
-print(letters[-1]) # u
+```python
+first = "Jordan"
+last = "Lee"
 
-letters[1] = 'é'
-print(letters)  # ['a', 'é', 'i', 'o', 'u']
+full_name = first + " " + last
+print(full_name)
 ```
 
 **Key Takeaway:**
-Lists are mutable; you can access and modify elements by index.
+Use `+` to join strings, but include any needed separators.
 
 ---
 
-### Problem 4: Dictionary basics
+### Problem 4: Reassignment and incremental change
+**Difficulty:** ⭐⭐
+
+**Prerequisites:** Variable creation, basic arithmetic
+
+**Problem:**
+Start with `count = 5`. Increase by 2, then multiply by 3. Print the final value.
+
+**Solution:**
+```python
+count = 5
+count += 2      # 7
+count *= 3      # 21
+print(count)    # 21
+```
+
+**Key Takeaway:**
+Compound assignment operators simplify updates.
+
+---
+
+### Problem 5: Booleans and condition-ready variables
 **Difficulty:** ⭐⭐⭐
-**Prerequisites:** Problem 3 concepts
 
-**Problem Statement:**
-Create a dictionary `student` with keys `name` (string), `grade` (float), and `passed` (boolean). Update `passed` to reflect whether `grade` is at least 60. Print the dictionary before and after.
+**Prerequisites:** Basic variables
 
-**Starter Code/Guidance:**
-```
-student = {"name": "Alex", "grade": 58.0, "passed": False}
-# update and print
-```
+**Problem:**
+Create `logged_in` as True if a user is authenticated and `credit_ok` as False if their balance is insufficient. Print both.
 
 **Solution:**
-```
-student = {"name": "Alex", "grade": 58.0, "passed": False}
-print(student)
+```python
+logged_in = True
+credit_ok = False
 
-student["grade"] = 72.5
-student["passed"] = student["grade"] >= 60
-print(student)
+print("Logged in:", logged_in)
+print("Credit OK:", credit_ok)
 ```
 
 **Key Takeaway:**
-Dictionaries store key-value pairs and can be updated dynamically.
-
----
-
-### Problem 5: Variable scope basics
-**Difficulty:** ⭐⭐⭐⭐
-**Prerequisites:** Basic functions (if you know them)
-
-**Problem Statement:**
-Write a function `add_five(x)` that creates a local variable `result` equal to `x + 5` and returns it. Call the function with `10` and print the returned value. Also, try to print `result` outside the function and explain what happens.
-
-**Starter Code/Guidance:**
-```
-def add_five(x):
-    # local variable
-    result = x + 5
-    return result
-
-print(add_five(10))
-print(result)  # what happens here?
-```
-
-**Solution:**
-```
-def add_five(x):
-    # local variable
-    result = x + 5
-    return result
-
-print(add_five(10))  # 15
-
-# The following line will raise a NameError because 'result' is local to the function
-try:
-    print(result)
-except NameError as e:
-    print("NameError:", e)
-```
-
-**Key Takeaway:**
-Variables defined inside a function are local; they aren’t accessible outside, illustrating scope.
-
----
-
-### Problem 6: String formatting with variables
-**Difficulty:** ⭐⭐⭐⭐
-**Prerequisites:** Problem 5 concepts
-
-**Problem Statement:**
-Create variables `city = "Paris"`, `year = 2024`, and `temperature = 18.5`. Print a sentence: "The temperature in Paris in 2024 was 18.5°C." using an f-string.
-
-**Starter Code/Guidance:**
-```
-city = "Paris"
-year = 2024
-temperature = 18.5
-# print formatted sentence
-```
-
-**Solution:**
-```
-city = "Paris"
-year = 2024
-temperature = 18.5
-
-print(f"The temperature in {city} in {year} was {temperature}°C.")
-```
-
-**Key Takeaway:**
-F-strings provide readable, convenient string interpolation using variables.
+Variables can store boolean states used in decisions.
 
 ---
 
 ## Independent Practice
 
-### Practice Problem 1: Variable arithmetic
+### Practice Problem 1: Temperature converter (Celsius to Fahrenheit)
 **Difficulty:** ⭐⭐
+
 **Problem:**
-Create two variables `x = 9` and `y = 4`. Compute and print their sum, difference, product, and quotient. Also print integer division and remainder.
+Given a Celsius temperature `c = 25`, compute Fahrenheit using the formula `f = c * 9/5 + 32`. Print the result.
 
 **Hints:**
-- Use `+`, `-`, `*`, `/`, `//`, `%`.
+- Use float division for precision.
+- Print with a descriptive message.
 
 **Solution:**
-```
-x = 9
-y = 4
-
-print("sum:", x + y)        # 13
-print("difference:", x - y) # 5
-print("product:", x * y)    # 36
-print("quotient:", x / y)   # 2.25
-print("integer division:", x // y)  # 2
-print("remainder:", x % y)          # 1
-```
-
-### Practice Problem 2: Mutable vs immutable
-**Difficulty:** ⭐⭐⭐
-**Problem:**
-Explain in your own words why a list is mutable and a string is immutable. Provide a short code example that shows mutability of a list and attempted mutation of a string that fails.
-
-**Hints:**
-- Try changing an element of a list vs. replacing a character in a string.
-
-**Solution:**
-```
-# Mutable: list
-fruits = ["apple", "banana"]
-fruits[0] = "cherry"
-print(fruits)  # ['cherry', 'banana']
-
-# Immutable: string
-text = "hello"
-try:
-    text[0] = "H"
-except TypeError as e:
-    print("Error:", e)  # 'str' object does not support item assignment
-```
-
-### Practice Problem 3: Variable naming and style
-**Difficulty:** ⭐⭐
-**Problem:**
-Rename the following poorly named variables to meaningful ones, preserving their values:
-```
-a = 3.14159
-b = "pi"
-c = True
-```
-
-**Solution:**
-```
-pi_value = 3.14159
-pi_label = "pi"
-is_pi_approximated = True
-```
-
-### Practice Problem 4: Deleting variables
-**Difficulty:** ⭐⭐⭐
-**Problem:**
-Create a variable `temp = 25`, print it, delete it, and show that accessing `temp` afterwards raises an error.
-
-**Solution:**
-```
-temp = 25
-print(temp)  # 25
-del temp
-try:
-    print(temp)
-except NameError as e:
-    print("NameError:", e)
-```
-
-### Practice Problem 5: Combining types
-**Difficulty:** ⭐⭐⭐⭐⭐
-**Problem:**
-Create a small program that stores a student record as a dictionary with keys `id` (int), `name` (str), `grades` (list of floats). Add a new grade to the `grades` list, update `average` key to the average of grades, and print the final dictionary.
-
-**Solution:**
-```
-student = {
-    "id": 12345,
-    "name": "Sam",
-    "grades": [88.0, 92.5, 79.0]
-}
-
-# Add a new grade
-student["grades"].append(85.5)
-
-# Compute average
-grades = student["grades"]
-average = sum(grades) / len(grades)
-student["average"] = average
-
-print(student)
+```python
+c = 25
+f = c * 9/5 + 32
+print(f"{c}°C is {f}°F")
 ```
 
 ---
 
-## Solutions (Expanded Explanations)
+### Practice Problem 2: Variable swap without a temporary variable
+**Difficulty:** ⭐⭐⭐
 
-### Why variables matter
-Variables are the essential building blocks for storing inputs, intermediate results, and final outputs in a program. They enable you to:
-- Keep track of user input and computed results
-- Pass data between functions
-- Build dynamic programs that react to changing values
+**Problem:**
+Swap values of `a = 4` and `b = 9` without a temporary variable. Print both after swap.
 
-### Choosing good names
-- Use descriptive, readable names that reflect the data’s meaning (e.g., `user_age`, `item_price`, `is_valid`).
-- Prefer nouns for data storage and verbs for actions or predicates (e.g., `count` vs. `increment`).
-- Use underscores for readability (snake_case) in Python.
+**Solution:**
+```python
+a = 4
+b = 9
 
-### Common mistakes and how to avoid them
-- Overusing global variables: Cluttered namespaces and harder-to-maintain code. Prefer local variables inside functions and clear interfaces.
-- Rebinding to different types accidentally: If you expect a variable to hold a number but it becomes a string, calculations will fail. Use clear naming and tests.
-- Name collisions with built-in names: Avoid names like `list`, `str`, or `dict` as your variables.
+a, b = b, a
 
-### Quick tips
-- Always print intermediate results when debugging to verify your understanding of what a variable holds.
-- Use comments near complex variable logic to explain why the value is assigned or updated.
-- When working with user input, convert and validate early to avoid type errors later.
+print("a =", a)
+print("b =", b)
+```
+
+---
+
+### Practice Problem 3: Safe string formatting
+**Difficulty:** ⭐⭐
+
+**Problem:**
+Create `name = "Sam"`, `age = 30`. Print: "Sam is 30 years old." using an f-string.
+
+**Solution:**
+```python
+name = "Sam"
+age = 30
+
+print(f"{name} is {age} years old.")
+```
+
+---
+
+### Practice Problem 4: Mixed types in a message
+**Difficulty:** ⭐⭐⭐
+
+**Problem:**
+Given `item = "apples"`, `quantity = 12`, `price = 0.5`, print: "You have 12 apples at $0.50 each." Ensure price formats to 2 decimals.
+
+**Solution:**
+```python
+item = "apples"
+quantity = 12
+price = 0.5
+
+print(f"You have {quantity} {item} at ${price:.2f} each.")
+```
+
+---
+
+### Practice Problem 5: Basic if-ready variables (conceptual)
+**Difficulty:** ⭐⭐⭐
+
+**Problem:**
+Create `inventory` with value 5. Create `order` with value 7. Print whether you need to restock (inventory < order).
+
+**Solution:**
+```python
+inventory = 5
+order = 7
+
+needs_restock = inventory < order
+print("Restock needed:", needs_restock)
+```
+
+---
+
+### Practice Problem 6: Case-sensitive variables
+**Difficulty:** ⭐
+
+**Problem:**
+What will be printed?
+```python
+value = 1
+Value = 2
+print(value, Value)
+```
+
+**Solution:**
+```
+1 2
+```
+
+---
+
+### Practice Problem 7: Large numbers and underscores for readability
+**Difficulty:** ⭐
+
+**Problem:**
+Create `population` with value 7_800_000_000 and print it.
+
+**Solution:**
+```python
+population = 7_800_000_000
+print(population)
+```
+
+---
+
+### Practice Problem 8: Combining user input (simulated)
+**Difficulty:** ⭐⭐⭐
+
+**Problem:**
+Assume you read a user’s name and age as strings: `name = "Alex"`, `age_str = "21"`. Create an integer `age` from `age_str` and print a greeting including the age.
+
+**Solution:**
+```python
+name = "Alex"
+age_str = "21"
+
+age = int(age_str)
+print(f"Hello, {name}! You are {age} years old.")
+```
+
+---
+
+## Mastery Challenge
+
+### Challenge 1: Real-world budget tracker (multiple variables, basic logic)
+**Difficulty:** ⭐⭐⭐⭐⭐
+**Skills Tested:** Variables, types, arithmetic, f-strings, basic logic
+
+**Time Estimate:** 45-75 minutes
+
+**Scenario:**
+You’re building a tiny budget tracker for a weekend trip. You have a list of expenses with their amounts in dollars. You’ll store the total budget, add expenses, and determine if you’re under budget or over.
+
+**Requirements:**
+- Set `budget` to 250.0
+- Create a list of expenses (e.g., [40.0, 15.50, 60.75, 120.0])
+- Compute `total_spent` by summing expenses
+- Compute `remaining` = `budget` - `total_spent`
+- Print a clear report showing budget, total spent, and remaining with two decimals
+- If you’re over budget, print a friendly warning
+
+**Solution Approach:**
+- Use a list to store expenses
+- Use `sum(...)` to total
+- Use f-strings for formatted output
+- Include a conditional for over-budget
+
+**Mentorship Notes:**
+- Start simple: track a few categories, then expand.
+- Consider edge cases: empty expenses, negative values (invalid), or float precision.
+
+**Solution:**
+```python
+# Budget setup
+budget = 250.0
+
+# Expenses (in dollars)
+expenses = [40.0, 15.50, 60.75, 120.0]
+
+# Calculations
+total_spent = sum(expenses)
+remaining = budget - total_spent
+
+# Report
+print("Trip Budget Report")
+print(f"Budget: ${budget:.2f}")
+print(f"Total spent: ${total_spent:.2f}")
+print(f"Remaining: ${remaining:.2f}")
+
+# Over-budget check
+if remaining < 0:
+    print("⚠️ Warning: You are over budget!")
+else:
+    print("✅ You are within budget. Nice planning!")
+```
+
+---
+
+### Challenge 2: Inventory-worth calculation (multiple item types)
+**Difficulty:** ⭐⭐⭐⭐
+
+**Skills Tested:** Variables, lists, loops, arithmetic
+
+**Scenario:**
+You manage a small shop. You have items with names, quantities, and unit prices. Compute total inventory value and print a summary.
+
+**Requirements:**
+- Define `items` as a list of dictionaries with keys: `name`, `qty`, `price`
+- Compute total value = sum(qty * price) for all items
+- Print per-item value and the grand total with two decimals
+
+**Solution Approach:**
+```python
+items = [
+    {"name": "Notebook", "qty": 30, "price": 2.50},
+    {"name": "Pen", "qty": 100, "price": 0.75},
+    {"name": "Sticker Pack", "qty": 20, "price": 1.25},
+]
+
+# Individual values
+total_value = 0.0
+print("Inventory Value by Item:")
+for item in items:
+    item_value = item["qty"] * item["price"]
+    total_value += item_value
+    print(f"- {item['name']}: {item['qty']} units * ${item['price']:.2f} = ${item_value:.2f}")
+
+print(f"Total inventory value: ${total_value:.2f}")
+```
+
+---
+
+### Challenge 3: Data-type robustness (input validation concept)
+**Difficulty:** ⭐⭐⭐⭐⭐
+
+**Skills Tested:** Variables, type conversion, basic validation
+
+**Scenario:**
+You’re building a simple form parser. You receive `raw_age = "27"` or `"twenty-seven"`. Normalize to an integer if possible, otherwise report invalid input.
+
+**Requirements:**
+- Try to convert to int; if it fails, set `age` to None
+- Print a friendly message depending on whether a valid age exists
+
+**Solution Approach:**
+```python
+raw_age = "27"  # try changing this to "twenty-seven" to test
+
+try:
+    age = int(raw_age)
+except ValueError:
+    age = None
+
+if age is not None:
+    print(f"Age parsed successfully: {age}")
+else:
+    print("Invalid age input. Please enter a numeric value.")
+```
 
 ---
 
 ## Summary
 
-- A variable is a named container that stores a value. You create it with an assignment, e.g., `x = 5`.
-- Python is dynamically typed: a variable’s type can change through reassignment.
-- Names must follow Python’s rules and be descriptive to improve readability.
-- Variables have scope: inside functions, variables are local unless declared otherwise.
-- You can store many data types in variables: numbers, strings, lists, dictionaries, booleans, and more.
-- Practice with naming, updating, and combining different types to build flexible programs.
+- Variables are named storage for values and are essential for building dynamic programs.
+- You can store integers, floats, strings, booleans, and more, and reassign values as needed.
+- Practice reinforces how to combine variables in expressions, format outputs, and keep code readable.
 
-Keep experimenting with small snippets to reinforce these concepts. As you gain confidence, you’ll start writing larger programs that rely on well-managed variables to store and transform data.
+---
 
+## Solutions (Key Explanations)
+
+- Stage 2 (Knowledge Check): Answers included in each problem above.
+- Stage 3 (Guided Practice): Fully worked solutions with explanations and common pitfalls noted in each problem.
+- Stage 4 (Independent Practice): Solutions provided for all practice problems.
+- Stage 5 (Mastery Challenge): Real-world scenarios with clear solution approaches and mentorship notes.
+
+If you’d like, I can tailor the difficulty, swap in different practice problems, or expand any section.
