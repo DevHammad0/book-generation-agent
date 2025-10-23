@@ -7,6 +7,7 @@ import asyncio
 import os
 import sys
 import argparse
+import re
 from dotenv import load_dotenv
 
 from agents import Agent, Runner
@@ -55,7 +56,26 @@ async def main() -> int:
         agent = Agent(name="book_generation_agent", instructions=SYSTEM_PROMPT)
         result = await Runner.run(agent, request)
         output = getattr(result, "final_output", None) or ""
-        print_utf8(output)
+
+        # Ensure output directory exists
+        books_dir = os.path.join(os.getcwd(), "books")
+        os.makedirs(books_dir, exist_ok=True)
+
+        # Create a safe filename from the topic/request
+        def make_filename_from_topic(topic: str) -> str:
+            base = topic.strip().lower()
+            slug = re.sub(r"[^a-z0-9]+", "_", base)
+            slug = slug.strip("_") or "output"
+            return f"{slug}.md"
+
+        filepath = os.path.join(books_dir, make_filename_from_topic(request))
+
+        # Write output to file using UTF-8
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(output)
+
+        # Print only the saved path
+        print_utf8(filepath)
         return 0
     except KeyboardInterrupt:
         sys.stderr.write("\nCancelled.\n")
