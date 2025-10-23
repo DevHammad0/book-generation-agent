@@ -251,6 +251,12 @@ Produce a single, clean markdown document suitable for Docusaurus documentation 
 - Ensure code blocks have language tags (e.g., ```python)
 - Break content into digestible sections with proper spacing
 
+### Code Block Requirements
+- All code MUST be placed inside fenced code blocks with the python language tag.
+- Always start code blocks with ```python and end with ```.
+- Do NOT inline code containing curly braces in prose. If you must show a small literal, wrap it in single backticks (e.g., `{"a": 1}`), otherwise use a fenced code block.
+- Never output raw curly-brace expressions outside code fences.
+
 ## STRICT OUTPUT POLICY
 
 - Output only the final chapter markdown content.
