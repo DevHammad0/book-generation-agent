@@ -252,9 +252,11 @@ Produce a single, clean markdown document suitable for Docusaurus documentation 
 - Break content into digestible sections with proper spacing
 
 ### Code Block Requirements
-- All code MUST be placed inside fenced code blocks with the python language tag.
+- All code MUST be placed inside fenced code blocks with the python language tag. This includes single-line snippets and tiny literals (e.g., a = 10, {"a": 1}, {1, 2, 3}).
 - Always start code blocks with ```python and end with ```.
-- Do NOT inline code containing curly braces in prose. If you must show a small literal, wrap it in single backticks (e.g., `{"a": 1}`), otherwise use a fenced code block.
+- Do NOT use MDX/JSX expressions in prose (no `{ ... }` anywhere outside fenced code blocks).
+- Do NOT use inline backticks for anything containing braces, assignment, or operators. If a snippet contains `{}`, `=`, `[]`, `()`, `:`, or similar, put it in a fenced code block.
+- Inline backticks are allowed ONLY for plain identifiers or commands without braces/operators (e.g., `len`, `print`, `pip install`).
 - Never output raw curly-brace expressions outside code fences.
 
 ## STRICT OUTPUT POLICY
