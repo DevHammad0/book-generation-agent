@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(awk:*)",
+      "WebFetch(domain:openai.github.io)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
