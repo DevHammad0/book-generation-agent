@@ -1,0 +1,70 @@
+name: Build & Deploy Docs
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'books/**'
+      - 'website/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install website deps
+        working-directory: website
+        run: npm ci
+
+      - name: Sync books to docs
+        shell: bash
+        run: |
+          mkdir -p website/docs
+          rm -rf website/docs/*
+          shopt -s nullglob
+          for f in books/*.md; do cp "$f" website/docs/; done || true
+          if [ -z "$(ls -A website/docs)" ]; then
+            echo "# Documentation" > website/docs/intro.md
+          fi
+
+      - name: Build Docusaurus
+        working-directory: website
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: website/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
