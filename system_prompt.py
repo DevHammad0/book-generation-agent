@@ -259,6 +259,13 @@ Produce a single, clean markdown document suitable for Docusaurus documentation 
 - Inline backticks are allowed ONLY for plain identifiers or commands without braces/operators (e.g., `len`, `print`, `pip install`).
 - Never output raw curly-brace expressions outside code fences.
 
+### MDX Safety - Angle Brackets and Tags
+- **CRITICAL:** NEVER use angle brackets `<` or `>` outside of fenced code blocks, even in comments or explanatory text.
+- Do NOT write things like `# <age> is a variable` or `the <name> variable` in comments - MDX will interpret these as HTML/JSX tags and cause compilation errors.
+- Instead, use backticks for variable names: `# The age variable` or `# Variable age stores the value`
+- If you need to show code syntax with angle brackets (like generics or HTML), it MUST be inside a fenced code block.
+- This applies to ALL content: comments, explanations, problem statements, and solutions.
+
 ### Containers (Lists and Blockquotes)
 - Avoid placing code blocks inside block quotes. Prefer normal fenced code outside quotes.
 - If a block quote is absolutely necessary, do NOT include any code or braces inside it.
