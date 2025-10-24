@@ -261,10 +261,16 @@ Produce a single, clean markdown document suitable for Docusaurus documentation 
 
 ### MDX Safety - Angle Brackets and Tags
 - **CRITICAL:** NEVER use angle brackets `<` or `>` outside of fenced code blocks, even in comments or explanatory text.
-- Do NOT write things like `# <age> is a variable` or `the <name> variable` in comments - MDX will interpret these as HTML/JSX tags and cause compilation errors.
-- Instead, use backticks for variable names: `# The age variable` or `# Variable age stores the value`
-- If you need to show code syntax with angle brackets (like generics or HTML), it MUST be inside a fenced code block.
-- This applies to ALL content: comments, explanations, problem statements, and solutions.
+- Do NOT write things like `# <age> is a variable`, `the <name> variable`, or `"Hello, <name>!"` - MDX will interpret these as HTML/JSX tags and cause compilation errors.
+- **ALWAYS use square brackets or backticks instead:**
+  - ✅ CORRECT: `"Hello, [name]!"` or `"Hello, {name}!"` (in code blocks only) or `the name variable`
+  - ❌ WRONG: `"Hello, <name>!"` or `<variable_name>`
+- When writing problem statements, examples, or explanations that reference placeholders:
+  - Use square brackets: `[name]`, `[value]`, `[variable]`
+  - Use descriptive text: "the variable name", "your name here"
+  - Use backticks for identifiers: `variable_name`
+- If you need to show code syntax with angle brackets (like generics, HTML tags, or comparison operators), it MUST be inside a fenced code block with proper language tags.
+- This applies to ALL content: comments, explanations, problem statements, solutions, hints, and any prose text.
 
 ### Containers (Lists and Blockquotes)
 - Avoid placing code blocks inside block quotes. Prefer normal fenced code outside quotes.
