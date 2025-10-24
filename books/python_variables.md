@@ -1,339 +1,215 @@
 # Python Variables
 
 ## Overview
-A variable in Python is a name that refers to a value stored in memory. You use variables to hold data (numbers, text, collections) so your program can read, modify, and reuse it. This lesson teaches what variables are, how to create and use them, common naming conventions, and typical mistakes.
+Hook: Imagine labeling jars in a pantry so you can find sugar, salt, and flour quickly — variables let you label and store data in your programs the same way.
 
 Learning objectives
-- Explain what a variable is and how Python binds names to values.
-- Create and update variables of common types (int, float, str, bool).
-- Use multiple assignment, swapping, and variable naming best practices.
-- Recognize and fix common variable-related errors.
+- 🎯 Define what a variable is and how Python stores them.
+- 🎯 Create, assign, and reassign variables using correct syntax.
+- 🎯 Identify and use common data types: integers, floats, strings, booleans.
+- 🎯 Recognize naming rules and common pitfalls (e.g., reserved words, mutable vs immutable).
+- 🎯 Apply variables in small code examples and solve practice problems.
 
 Brief theory
-In Python, variables are labels that refer to objects. Assignment uses the = operator: the expression on the right is evaluated to produce an object, and the name on the left is bound to that object. Python is dynamically typed: a variable can refer to different types at different times. Names live in namespaces; most beginner code uses the global namespace or local function namespaces.
+A *variable* is a name that refers to a value stored in the computer's memory. In Python, assignment uses the equals sign (`=`) to bind a name to an object. Python is dynamically typed: you don't declare types explicitly — the interpreter infers the type at runtime. Variable names point to objects; multiple names can refer to the same object and names can be rebound to new objects.
 
 Analogy
-Think of a variable as a sticky note attached to an item. The sticky note has a label (the variable name) and points to the item (the value). You can remove the note and attach it to a different item without changing the items themselves.
+Think of a variable as a sticky note on a jar: the jar holds the actual contents (the value) and the sticky note (the name) points to it. You can move the sticky note to another jar or replace the jar contents.
 
 Why it matters
-Variables let you write reusable, readable code. They make algorithms adaptable to different inputs, support debugging by isolating values, and are the foundation of control flow and data structures.
+Variables are fundamental — every program stores, transforms, and outputs data via variables. Clear naming and correct use prevent bugs and make code readable and maintainable.
 
 ## Key Concepts
 
-Basic assignment
-```python
-x = 10          # x refers to an integer object 10
-name = "Ada"    # name refers to a string object "Ada"
-pi = 3.14159    # float
-is_ready = True # boolean
-```
-
-Rebinding and dynamic typing
-```python
-v = 5
-v = "five"    # same name now refers to a string
-```
-
-Multiple assignment and swapping
-```python
-a, b = 1, 2           # parallel assignment
-a, b = b, a           # swap without temporary variable
-```
-
-Mutable vs immutable
-- Immutable types (int, float, str, tuple) cannot be changed in place; rebinding creates a new object.
-- Mutable types (list, dict, set) can be modified in place.
-```python
-lst = [1, 2]
-lst.append(3)  # modifies the same list object
-```
-
-Naming rules and best practices
-- Start with a letter or underscore; follow with letters, digits, or underscores.
-- Case-sensitive: `count` and `Count` are different.
-- Avoid Python keywords (e.g., `for`, `if`, `class`).
-- Use descriptive names, e.g., `user_age` instead of `u`.
-
-Memory note (brief)
-Names point to objects; multiple names can refer to the same object (aliasing). For immutable objects aliasing is harmless; for mutable objects it can cause side effects.
+- *Assignment:* `name = value` creates or updates a binding.
+- *Dynamic typing:* A variable can hold any type and change types later.
+- *Immutable vs Mutable:* Immutable objects (e.g., ints, strings, tuples) cannot be changed; mutable objects (e.g., lists, dicts, sets) can be modified in place.
+- *Naming rules:* Use letters, digits, and underscores; cannot start with a digit; avoid Python reserved keywords (e.g., `for`, `if`, `class`).
+- *Best practices:* Use descriptive, lowercase names with underscores (snake_case). Prefer immutability for simpler reasoning.
 
 Knowledge check (MCQs)
-Q1: What does the statement `x = 3` do?
-a) Creates a variable named 3  
-b) Binds the name x to the integer object 3  
-c) Declares the type of x to be int  
-d) Allocates memory for x but leaves it empty
 
-**Answer:** b) Binds the name x to the integer object 3 — assignment evaluates the right side and binds the name.
+Q1: Which of the following is a valid variable name?
+a) 2nd_value
+b) second-value
+c) second_value
+d) second value
 
-Q2: Which is a valid variable name?
-a) 2nd_value  
-b) total-sum  
-c) _result  
-d) for
+**Answer:** c) second_value — starts with a letter and uses underscore.
 
-**Answer:** c) _result — starts with underscore, valid. Others start with digit, contain hyphen, or are a keyword.
+Q2: After `x = 5; x = "hello"`, what is the type of x?
+a) int
+b) str
+c) float
+d) It depends on interpreter settings
 
-Q3: After `a = [1, 2]; b = a; b.append(3)`, what is `a`?
-a) [1, 2]  
-b) [1, 2, 3]  
-c) Error — cannot append  
-d) None
+**Answer:** b) str — Python dynamically rebinds x to a string.
 
-**Answer:** b) [1, 2, 3] — a and b reference the same list (aliasing).
+Q3: Which operation modifies a list in place?
+a) `a = a + [1]`
+b) `a.append(1)`
+c) `a = a * 2`
+d) `a = list(a)`
 
-Q4: Which statement swaps values without a temporary variable?
-a) temp = a; a = b; b = temp  
-b) a, b = b, a  
-c) swap(a, b)  
-d) a = b; b = a
+**Answer:** b) `a.append(1)` — append mutates the original list.
 
-**Answer:** b) a, b = b, a — Python supports tuple unpacking for swapping.
+Q4: Which statement is true about immutable objects?
+a) Their value cannot be referenced by multiple names.
+b) They can be modified without creating a new object.
+c) Operations that seem to modify them create new objects.
+d) They are always faster to work with than mutable ones.
 
-Q5: Which of these is immutable?
-a) list  
-b) dict  
-c) tuple  
-d) set
+**Answer:** c) Operations that seem to modify them create new objects.
 
-**Answer:** c) tuple — tuples are immutable; others are mutable.
+Q5: Which of these is a Python keyword and cannot be used as a variable?
+a) `value`
+b) `def`
+c) `data`
+d) `item`
+
+**Answer:** b) `def` — it's a keyword used to define functions.
 
 ## Examples
 
-Example: Basic operations with variables
+Example: basic assignments
 ```python
-# assign
-x = 7
-y = 2
+# integers and strings
+age = 30
+name = "Aisha"
 
-# arithmetic
-sum_xy = x + y
-ratio = x / y
+# float and boolean
+temperature = 36.6
+is_member = True
 
-# string interpolation
-name = "Sam"
-greeting = f"Hello, {name}!"
-
-print(sum_xy, ratio, greeting)
+# reassigning and dynamic typing
+age = "thirty"
 ```
 
-Example: Aliasing pitfalls with lists
+Example: multiple assignment and swapping
 ```python
-a = [0, 1, 2]
-b = a          # aliasing: b references same list
-b[0] = 99
-# a is now [99, 1, 2]
+# multiple assignment
+x, y, z = 1, 2, 3
 
-# to avoid aliasing, copy the list
-c = a.copy()
-c[0] = 0
-# a remains [99, 1, 2]; c is [0, 1, 2]
+# swap without temp
+x, y = y, x
 ```
 
-Example: Constants convention
+Example: mutable vs immutable demonstration
 ```python
-PI = 3.14159   # by convention, uppercase signals a constant
-MAX_RETRIES = 5
+# immutable integer
+a = 10
+b = a  # b points to same int object 10
+a = a + 1  # a now points to a new int object 11, b still 10
+
+# mutable list
+lst1 = [1, 2]
+lst2 = lst1  # both names refer to same list
+lst1.append(3)  # mutates the single shared list
+# now lst2 is [1, 2, 3] as well
 ```
 
 ## Practice Problems
 
-## Problem 1: Create and print variables
-**Difficulty:** ⭐
-**Problem:**
-Create variables `first_name`, `last_name`, and `age`. Print "My name is <first_name> <last_name> and I am <age> years old."
-
+### Problem 1: Greeting message
+Difficulty: ⭐
+Problem: Assign your name to a variable `user_name` and create `greeting` that says "Hello, <name>!".
 Hints:
-- Use f-strings.
+- Use string concatenation or f-strings.
 
-## Problem 2: Swap two variables
-**Difficulty:** ⭐⭐
-**Problem:**
-Given variables `a = 10` and `b = 20`, swap them so `a` becomes 20 and `b` becomes 10 without using a temporary variable.
+### Problem 2: Temperature conversion
+Difficulty: ⭐⭐
+Problem: Given `celsius = 25`, compute `fahrenheit` using formula F = C * 9/5 + 32.
 
-Hints:
-- Use tuple unpacking.
+### Problem 3: Swap values
+Difficulty: ⭐⭐
+Problem: Swap values of variables `a` and `b` without using a temporary variable.
 
-## Problem 3: Sum numeric inputs
-**Difficulty:** ⭐⭐
-**Problem:**
-Read two numbers (strings), convert them to integers, store them in variables, and print their sum.
+### Problem 4: Sum and average
+Difficulty: ⭐⭐⭐
+Problem: Given `numbers = [4, 8, 15, 16, 23, 42]`, compute the sum and average, store them in `total` and `avg`.
 
-Hints:
-- Use int() conversion.
+### Problem 5: Mutable aliasing bug
+Difficulty: ⭐⭐⭐⭐
+Problem: Explain and fix the bug: two variables `config1 = {"mode": "dev"}` and `config2 = config1`; then `config2["mode"] = "prod"`. The intent was for `config2` to be an independent copy.
 
-## Problem 4: Avoid aliasing
-**Difficulty:** ⭐⭐⭐
-**Problem:**
-Given `original = [1, 2, 3]`, create a variable `copied` that is a separate list. Modify `copied` and show `original` is unchanged.
-
-Hints:
-- Use list.copy() or slicing.
-
-## Problem 5: Type reassignment
-**Difficulty:** ⭐⭐⭐
-**Problem:**
-Start with `value = 100`. Reassign `value` to be the string "one hundred", then to a list containing the number 100. Print the type after each assignment.
-
-Hints:
-- Use type() to inspect types.
-
-## Challenge 1: Word frequency map
-**Difficulty:** ⭐⭐⭐⭐⭐
-Skills Tested: variables, dict, loops, string methods
-Time Estimate: 45 minutes
-
-Scenario:
-Write code that reads a string sentence and builds a dictionary mapping each lowercase word to its frequency. Ignore punctuation `.,!?` and treat words separated by spaces.
-
-Requirements:
-- Use variables for the sentence, cleaned words list, and the frequency dictionary.
-- Show top 3 most frequent words.
-
-## Challenge 2: Safe update of configuration
-**Difficulty:** ⭐⭐⭐⭐
-Skills Tested: variables, dict copying, functions
-Time Estimate: 45 minutes
-
-Scenario:
-Given a default configuration dict `defaults`, and a user-provided dict `user_conf`, create a new `effective_conf` that starts from defaults and updates with user overrides without mutating `defaults`. Provide two approaches and explain pros/cons.
-
-Requirements:
-- Demonstrate shallow copy and copy via dict()
-- Show what happens if a value is a nested mutable object
-
-## Challenge 3: Rolling average
-**Difficulty:** ⭐⭐⭐⭐
-Skills Tested: variables, lists, math
-Time Estimate: 45-60 minutes
-
-Scenario:
-Implement a function that maintains the last N numeric readings in a variable and returns the rolling average when a new reading arrives. Do not use external libraries.
-
-Requirements:
-- Use a list to store last N readings
-- Efficiently update state and compute average
+### Problem 6: Name validation
+Difficulty: ⭐⭐⭐⭐
+Problem: Write a function `is_valid_var(name)` that returns True if `name` is a valid Python identifier and not a keyword; otherwise False. (Hint: use `str.isidentifier()` and `keyword` module.)
 
 ## Solutions
 
-Solution to Problem 1
+### Solution 1
 ```python
-first_name = "Jane"
-last_name = "Doe"
-age = 28
-print(f"My name is {first_name} {last_name} and I am {age} years old.")
+user_name = "Aisha"
+greeting = f"Hello, {user_name}!"
+print(greeting)  # Hello, Aisha!
 ```
+Key takeaway: use descriptive variables and f-strings for clarity.
 
-Key takeaway: Use clear variable names and f-strings for readable output.
-
-Solution to Problem 2
+### Solution 2
 ```python
-a = 10
-b = 20
+celsius = 25
+fahrenheit = celsius * 9 / 5 + 32
+print(fahrenheit)  # 77.0
+```
+Key takeaway: numeric operations follow normal precedence; use floats when needed.
+
+### Solution 3
+```python
+a = 5
+b = 10
+# swap
 a, b = b, a
-# a is now 20, b is 10
+# now a == 10, b == 5
 ```
+Key takeaway: tuple unpacking is the Pythonic swap.
 
-Key takeaway: Tuple unpacking swaps cleanly without temporary variables.
-
-Solution to Problem 3
+### Solution 4
 ```python
-s1 = "7"
-s2 = "13"
-n1 = int(s1)
-n2 = int(s2)
-print(n1 + n2)  # 20
+numbers = [4, 8, 15, 16, 23, 42]
+total = sum(numbers)
+avg = total / len(numbers)
+print(total, avg)  # 108 18.0
 ```
+Key takeaway: built-ins like sum() simplify common tasks.
 
-Key takeaway: Convert input strings to numeric types before arithmetic.
-
-Solution to Problem 4
+### Solution 5
+Explanation: `config2 = config1` makes both names refer to the same dict (aliasing). Mutating one affects the other. Fix by copying.
 ```python
-original = [1, 2, 3]
-copied = original.copy()  # or original[:] for a shallow copy
-copied.append(4)
-# original remains [1, 2, 3]; copied is [1, 2, 3, 4]
+import copy
+
+config1 = {"mode": "dev"}
+# shallow copy
+config2 = config1.copy()
+config2["mode"] = "prod"
+# config1 remains {"mode": "dev"}
+
+# for nested structures use deepcopy
+config3 = copy.deepcopy(config1)
 ```
+Key takeaway: use copies to avoid unintended shared mutations.
 
-Key takeaway: Copy mutable objects to avoid unintended aliasing.
-
-Solution to Problem 5
+### Solution 6
 ```python
-value = 100
-print(type(value))  # <class 'int'>
+import keyword
 
-value = "one hundred"
-print(type(value))  # <class 'str'>
+def is_valid_var(name):
+    # must be a string identifier and not a Python keyword
+    return isinstance(name, str) and name.isidentifier() and not keyword.iskeyword(name)
 
-value = [100]
-print(type(value))  # <class 'list'>
+# examples
+print(is_valid_var("var1"))   # True
+print(is_valid_var("1var"))   # False
+print(is_valid_var("def"))    # False
 ```
-
-Key takeaway: Variables can be rebound to different types freely in Python.
-
-Solution sketch for Challenge 1 (word frequency)
-```python
-import string
-
-sentence = "Hello, world! Hello world."
-# remove punctuation
-clean = sentence.translate(str.maketrans("", "", ".,!?"))
-words = clean.lower().split()
-freq = {}
-for w in words:
-    freq[w] = freq.get(w, 0) + 1
-
-# top 3
-top3 = sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
-print(top3)
-```
-
-Solution sketch for Challenge 2 (config copy)
-```python
-defaults = {"theme": "light", "retries": 3, "paths": ["a", "b"]}
-user_conf = {"theme": "dark", "paths": ["x"]}
-
-# approach 1: shallow copy
-effective_conf = defaults.copy()
-effective_conf.update(user_conf)
-
-# approach 2: copy via dict()
-effective_conf2 = dict(defaults)
-effective_conf2.update(user_conf)
-
-# note: if 'paths' is a list, both copies still reference the same list object unless you deep-copy
-```
-
-Solution sketch for Challenge 3 (rolling average)
-```python
-class RollingAverage:
-    def __init__(self, n):
-        self.n = n
-        self.window = []
-        self.total = 0.0
-
-    def add(self, value):
-        self.window.append(value)
-        self.total += value
-        if len(self.window) > self.n:
-            removed = self.window.pop(0)
-            self.total -= removed
-        return self.total / len(self.window)
-
-# usage
-ra = RollingAverage(3)
-print(ra.add(10))  # 10.0
-print(ra.add(20))  # 15.0
-print(ra.add(30))  # 20.0
-print(ra.add(40))  # (20+30+40)/3 = 30.0
-```
+Key takeaway: use built-in helpers for robust validation.
 
 ## Common Pitfalls
-- Using a hyphen or starting a name with a digit: causes SyntaxError.
-- Expecting assignment to copy mutable objects: leads to aliasing bugs.
-- Modifying a list while iterating over it: can skip elements or cause unexpected behavior.
-- Relying on variable names across functions without passing them: use arguments/returns or proper scope.
-- Assuming types: check or convert types before operations.
+- Using Python keywords as variable names (e.g., `class = 3`) — SyntaxError.
+- Assuming assignment copies mutable objects — leads to aliasing bugs.
+- Reusing ambiguous names like `l`, `O`, or `I` that look similar; use clear names.
+- Relying on implicit type conversions; explicit conversion often clearer (e.g., `int("3")`).
+- Modifying immutable objects expecting in-place change (strings are immutable — methods return new strings).
 
 ## Summary
-Variables are fundamental labels that bind names to objects. Learn assignment, naming conventions, reassigning across types, and the difference between mutable and immutable objects. Practice creating, updating, and safely copying variables to avoid common bugs.
+Variables label and store values; Python uses dynamic typing and simple assignment. Choose clear names, understand immutability vs mutability, and watch for aliasing when copying mutable objects. Practice swapping, arithmetic, and type-aware operations to build confidence.
